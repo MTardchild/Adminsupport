@@ -1,10 +1,9 @@
 <?php
 	include 'MySQLCredentials.php';
-	$connection = mysql_connect($MySQLHost, $MySQLUser, $MySQLPass);
-	$db = mysql_select_db("phptest", $connection);
+	$connection = new mysqli($MySQLHost, $MySQLUser, '', $MySQLPass);
+	$db = $connection->select_db("phptest");
 
-	$query = sprintf("SELECT * FROM log ORDER BY date DESC");
-	$result = mysql_query($query);
+	$query = $connection->query("SELECT * FROM log ORDER BY date DESC");
 
 	echo "<div class=\"log\"><table>
 	  <thead>
@@ -17,7 +16,7 @@
 		</tr>
 	  </thead>
 	  <tbody>";
-	  while ($row = mysql_fetch_assoc($result)) {
+	  while ($row = $query->fetch_array(MYSQL_ASSOC)) {
 	echo "
 		<tr>
 			<td>" . $row['id'] . "</td>
@@ -30,5 +29,5 @@
 		</tr>";
 	  }
 	echo "</tbody></table></div>";
-	mysql_close($connection); 
+	$connection->close(); 
 ?>
