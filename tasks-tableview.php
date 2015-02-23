@@ -10,12 +10,12 @@
 	
 	echo '<table>
 	  <thead>
-		<tr><th colspan=\"6\">Tasks</th></tr>
+		<tr><th colspan=\'6\'>Tasks</th></tr>
 		<tr>
 		  <th>#</th>
 		  <th>Name</th>
 		  <th>Score</th>
-		  <th colspan=\"2\">Special</th>
+		  <th colspan=\'2\'>Special</th>
 		</tr>
 	  </thead>
 	  <tbody>';
@@ -29,7 +29,7 @@
 			if($row['special'] == 1) { echo 'Yes'; } else { echo 'No'; } 
 			echo '</td>
 		  <td>
-			<a href=\"tasks-delete.php?id=' . $row['id'] . '\" class=\"button\">Delete</a>
+			<a href=\'tasks-delete.php?id=' . $row['id'] . '\' class=\'button\'>Delete</a>
 		  </td>
 		</tr>';
 	  }

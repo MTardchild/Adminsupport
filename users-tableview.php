@@ -10,7 +10,7 @@
 	
 	echo '<table>
 	  <thead>
-		<tr><th colspan=\"8\">Users</th></tr>
+		<tr><th colspan=\'8\'>Users</th></tr>
 		<tr>
 		  <th>#</th>
 		  <th>Name</th>
@@ -18,11 +18,11 @@
 		  <th>Level</th>
 		  <th>Driver</th>
 		  <th >Available</th>
-		  <th colspan=\"2\">Score</th>
+		  <th colspan=\'2\'>Score</th>
 		</tr>
 	  </thead>
 	  <tbody>';
-	  while ($row = $query->fetch_array(MYSQL_ASSOC) {
+	  while ($row = $query->fetch_array(MYSQL_ASSOC)) {
 	echo '
 		<tr>
 			<td>' . $row['id'] . '</td>
@@ -37,7 +37,7 @@
 			echo '</td>
 			<td>' . $row['score'] . '</td>
 		  <td>
-			<a href=\"users-delete.php?id=' . $row['id'] . '\" class=\"button\">Delete</a>
+			<a href=\'users-delete.php?id=' . $row['id'] . '\' class=\'button\'>Delete</a>
 		  </td>
 		</tr>';
 	  }
