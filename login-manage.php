@@ -33,19 +33,17 @@
 												<select name="userid">
 													<option value="" disabled selected>Staff Number</option>
 													<?php
-														$connection = new mysqli($MySQLHost, $MySQLUser, $MySQLPass);
+														$connection = new mysqli($MySQLHost, $MySQLUser, $MySQLPass, $MySQLDB);
 														if ($connection->connect_error) {
 														die('Connect Error (' . $connection->connect_errno() . ') '
 																. $connection->connect_error());
 														}
 
-														$connection->select_db('phptest');
-
-														$query = $connection->query('SELECT id, firstname FROM users');
+														$query = $connection->query('SELECT user_id, firstname FROM users');
 														
 														while ($row = $query->fetch_assoc()) 
 														{
-															echo '<option>' . $row['id'] . '</option>';
+															echo '<option>' . $row['user_id'] . '</option>';
 														}
 														$connection->close();
 													?> 

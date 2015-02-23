@@ -1,10 +1,10 @@
 <?php
 	if(!isset($_SESSION['login_user'])){
 		include('login.php'); // Login Script		
-	} 
+	}
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<?php include('head.html'); ?>
 	<body>
 	<!-- If _not_ logged in -->
@@ -62,11 +62,11 @@
 													. $connection->connect_error);
 												}
 
-												$query = $connection->query('SELECT id, firstname FROM users');
+												$query = $connection->query('SELECT user_id, firstname FROM users');
 												
 												echo '<select name=\'trainee\'><option value=\'default\'>Default</option>';
 												while ($row = $query->fetch_array(MYSQL_ASSOC)) {
-												echo '<option value=\'' . $row['id'] . '\'>' . $row['id'] . ', ' . $row['firstname'] . '</option>';
+												echo '<option value=\'' . $row['user_id'] . '\'>' . $row['user_id'] . ', ' . $row['firstname'] . '</option>';
 												  }
 													echo '</select>';
 											?>	
@@ -76,7 +76,7 @@
 												
 												echo '<select name=\'task\'><option name=\'default\' value=\'default\' selected>Please Select Task</option>';
 												while ($row = $query->fetch_array(MYSQL_ASSOC)) {
-												echo '<option value=\'' . $row['id'] . '\'>' . $row['name'] . ', ' . $row['score']; 
+												echo '<option value=\'' . $row['user_id'] . '\'>' . $row['name'] . ', ' . $row['score']; 
 												if ($row['special'] == 1) {
 													echo ', Special';
 												}

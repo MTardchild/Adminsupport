@@ -14,13 +14,13 @@
 	}
 		
 	// SQL query to fetch information of registered users and finds user match.
-	$query = $connection->query("select * from users where id='$userid'");
+	$query = $connection->query("select * from users where user_id='$userid'");
 	$rows = $query->num_rows;
 		if ($rows == 1) {
 			echo "User ID already in use.";
 			exit;
 		} else {
-			$query = "INSERT INTO users (id, firstname, lastname, level, driver, available, score) VALUES ('$userid', '$firstname', '$lastname', '$level', '$driver', '0', '0')";
+			$query = "INSERT INTO users (user_id, firstname, lastname, level, driver, available, score) VALUES ('$userid', '$firstname', '$lastname', '$level', '$driver', '0', '0')";
 			if ($userid == "" || $firstname == "" || $lastname == "" || $level == "" || $driver == "") {
 				echo "Error: One or more fields empty";
 				exit;

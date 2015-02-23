@@ -35,7 +35,7 @@ if(isset($_SESSION['login_user'])){
 
 		if($return == 0)
 		{
-			$entry = "INSERT INTO login (id, username, password) VALUES ('$userid', '$username', '$password')";
+			$entry = "INSERT INTO login (user_id, username, password) VALUES ('$userid', '$username', '$password')";
 			$entry_success = $connection->query($entry);
 			
 			if($entry_success == true) {
@@ -70,11 +70,11 @@ if(isset($_SESSION['login_user'])){
 									. $connection->connect_error);
 								}
 
-								$query = $connection->query('SELECT id, firstname FROM users');
+								$query = $connection->query('SELECT user_id, firstname FROM users');
 								
 									while ($row = $query->fetch_array(MYSQL_ASSOC)) 
 									{
-										echo '<option>' . $row['id'] . '</option>';
+										echo '<option>' . $row['user_id'] . '</option>';
 									}
 								$connection->close();
 							?> 

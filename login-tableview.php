@@ -18,13 +18,13 @@
 		</tr>
 	  </thead>
 	  <tbody>";
-	  while ($row = $query->fetch_array(MYSQL_ASSOC)) {
+	  while ($row = $query->fetch_array(MYSQLI_ASSOC)) {
 	echo "
 		<tr>
-			<td>" . $row['id'] . "</td>
+			<td>" . $row['user_id'] . "</td>
 			<td>" . $row['username'] . "</td>
 		  <td>
-			<a href=\"login-delete.php?id=" . $row['id'] . "\" class=\"button\">Delete</a>
+			<a href=\"login-delete.php?id=" . $row['user_id'] . "\" class=\"button\">Delete</a>
 		  </td>
 		</tr>";
 	  }

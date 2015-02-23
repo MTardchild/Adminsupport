@@ -1,34 +1,15 @@
 <?php
-	if(isset($_SESSION['login_user'])){ 
-	} else {
+	if(!isset($_SESSION['login_user'])){
 		include('login.php'); // Login Script
 	}
 ?>
+<!doctype html>
+<html lang="en">
 	<?php include('head.html'); ?>
 	<body>
-	<!-- If logged in -->
+		<!-- If _not_ logged in -->
 	<?php
-		if(isset($_SESSION['login_user'])){
-			include('session.php');
-			// Navi 
-			include('navi.html');
-	?>
-	<!-- Content -->
-		<div id="outer">
-			<div id="middle">
-				<div id="dashboard">
-					<div class="card">
-						<?php
-							include 'log-tableview.php';
-						?>
-					</div>
-				</div>
-			</div>
-		</div>
-						
-	<!-- If _not_ logged in -->
-	<?php
-		} else {
+		if(!isset($_SESSION['login_user'])){
 	?>
 		<div id="outer">
 			<div id="middle">
@@ -48,6 +29,26 @@
 	<?php
 		}
 	?>
+	
+	<!-- If logged in -->
+	<?php
+		if(isset($_SESSION['login_user'])){
+			include('session.php');
+			include('navi.html');
+		}
+	?>
+	<!-- Content -->
+		<div id="outer">
+			<div id="middle">
+				<div id="dashboard">
+					<div class="card">
+						<?php
+							include 'log-tableview.php'; 
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
 	<footer>
 		
 	</footer>

@@ -16,17 +16,17 @@
 	}
 		
 	// SQL query to fetch information of registered users and finds user match.
-	$query = $connection->query("select * from login where id='$userid'");
+	$query = $connection->query("select * from login where user_id='$userid'");
 	$rows = $query->num_rows;
 		if ($rows == 1) {
 			echo "User ID already in use.";
 		} else {
-			$query = "INSERT INTO login (id, username, password) VALUES ('$userid', '$username', '$password')";
+			$query = "INSERT INTO login (user_id, username, password) VALUES ('$userid', '$username', '$password')";
 			if ($userid == "" || $username == "" || $password == "") {
 				echo "Error: One or more fields empty";
 				exit;
 			}
-			if ($query) {
+			if ($connection->query($query)) {
 				echo "New record created successfully";
 			} else {
 				echo $connection->errno . ": " . $connection->error . "\n";	

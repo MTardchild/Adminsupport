@@ -22,14 +22,14 @@
 	  while ($row = $query->fetch_array(MYSQL_ASSOC)) {
 	echo '
 		<tr>
-			<td>' . $row['id'] . '</td>
+			<td>' . $row['task_id'] . '</td>
 			<td>' . $row['name'] . '</td>
 			<td>' . $row['score'] . '</td>
 			<td>';
 			if($row['special'] == 1) { echo 'Yes'; } else { echo 'No'; } 
 			echo '</td>
 		  <td>
-			<a href=\'tasks-delete.php?id=' . $row['id'] . '\' class=\'button\'>Delete</a>
+			<a href=\'tasks-delete.php?id=' . $row['task_id'] . '\' class=\'button\'>Delete</a>
 		  </td>
 		</tr>';
 	  }

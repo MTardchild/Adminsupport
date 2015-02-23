@@ -14,7 +14,7 @@
 		. $connection->connect_error);
 	}
 	
-	if($connection->query("DELETE from log WHERE id='$id'")) {
+	if($connection->query("DELETE from log WHERE log_id='$id'")) {
 		echo 'Record deleted.';
 	} else {
 		echo $connection->errno . ": " . $connection->error . "\n";

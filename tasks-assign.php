@@ -16,7 +16,7 @@
 		. $connection->connect_error);
 	}
 	
-	$query = $connection->query("SELECT score, special FROM tasks WHERE id='$task'");
+	$query = $connection->query("SELECT score, special FROM tasks WHERE task_id='$task'");
 	$row = $query->num_rows;
 
 	if ($query) {
@@ -29,7 +29,7 @@
 	}
 		
 	if ($trainee == 'default') {
-		$query = $connection->query('SELECT id, score, available FROM users WHERE available=\'1\' ORDER BY score');
+		$query = $connection->query('SELECT user_id, score, available FROM users WHERE available=\'1\' ORDER BY score');
 		
 		if($query->num_rows == 0){
 		   echo "No trainee available.";
@@ -39,11 +39,11 @@
 		
 		$row = $query->fetch_array(MYSQL_ASSOC);
 		
-		echo 'Lowballer/Trainee selected: ' . $row['id'] . '<br>';
+		echo 'Lowballer/Trainee selected: ' . $row['user_id'] . '<br>';
 	
 		$recipient = 'testerino.subject@te.st';
 		$subject = 'Addminsupport - New Task Assigned';
-		$message = 'Staff Number: ' . $row['id'];
+		$message = 'Staff Number: ' . $row['user_id'];
 		
 		$header = 'To: Testerino <testerino.subject@te.st>' . "\r\n";
 		$header .= 'From: Adminsupporttool <geburtstag@example.com>' . "\r\n";

@@ -12,18 +12,18 @@
 		. $connection->connect_error);
 	}
 
-	$query = $connection->query("select * from tasks where id='$taskid'");
+	$query = $connection->query("select * from tasks where task_id='$taskid'");
 	$rows = $query->num_rows;
 		if ($rows == 1) {
 			echo 'Task ID already in use.';
 			exit;
 		} else {
-			$query = "INSERT INTO tasks (id, name, score, special) VALUES ('$taskid', '$taskname', '$score', '$special')";
+			$query = "INSERT INTO tasks (task_id, name, score, special) VALUES ('$taskid', '$taskname', '$score', '$special')";
 			if ($taskid == "" || $taskname == "" || $score == "" || $special == "") {
 				echo 'Error: One or more fields empty';
 				exit;
 			}
-			if ($query) {
+			if ($connection->query($query)) {
 				echo 'New record created successfully';
 			} else {
 				echo 'Error';

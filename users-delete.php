@@ -8,7 +8,7 @@
 		. $connection->connect_error);
 	}
 	
-	if($connection->query("DELETE from users WHERE id='$id'")) {
+	if($connection->query("DELETE from users WHERE user_id='$id'")) {
 		echo "Record deleted.";
 	} else {
 		echo $connection->errorno . ": " . $connection->error . "\n";

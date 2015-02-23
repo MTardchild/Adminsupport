@@ -25,7 +25,7 @@
 	  while ($row = $query->fetch_array(MYSQL_ASSOC)) {
 	echo '
 		<tr>
-			<td>' . $row['id'] . '</td>
+			<td>' . $row['user_id'] . '</td>
 			<td>' . $row['firstname'] . '</td>
 			<td>' . $row['lastname'] . '</td>									
 			<td>' . $row['level'] . '</td>
@@ -37,7 +37,7 @@
 			echo '</td>
 			<td>' . $row['score'] . '</td>
 		  <td>
-			<a href=\'users-delete.php?id=' . $row['id'] . '\' class=\'button\'>Delete</a>
+			<a href=\'users-delete.php?id=' . $row['user_id'] . '\' class=\'button\'>Delete</a>
 		  </td>
 		</tr>';
 	  }
