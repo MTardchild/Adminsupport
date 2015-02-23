@@ -30,6 +30,12 @@
 		$rows = $query->num_rows;
 			if ($rows == 1) {
 				$_SESSION['login_user']=$username; // Initializing Session
+				
+				$query = $connection->query("SELECT rights FROM login WHERE username='$username'");
+				$row = $query->fetch_array(MYSQLI_ASSOC);
+				
+				$_SESSION['rights'] = $row['rights'];
+				
 				header("location: index.php"); // Redirecting To Other Page
 			} else {
 			$error = "Username or Password is invalid";
