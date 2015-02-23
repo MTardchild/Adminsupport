@@ -11,10 +11,11 @@ if(isset($_SESSION['login_user'])){
 	$_SESSION['error'] = ""; // Variable To Store Error Message
 		
 	if (isset($_POST['submit'])) {
-		$connection = mysql_connect($MySQLHost, $MySQLUser , $MySQLPass)
-		or die("Could not connect to database");
-
-		mysql_select_db("phptest") or die ("Unable to select database");
+		$connection = new mysqli($MySQLHost, $MySQLUser , $MySQLPass, $MySQLDB);
+		if ($connection->connect_error) {
+			die('Connect Error (' . $connection->connect_errno . ') '
+			. $connection->connect_error);
+		}
 
 		$userid = $_POST["userid"];
 		$username = $_POST["username"];
@@ -23,29 +24,31 @@ if(isset($_SESSION['login_user'])){
 
 		if($password != $password2 OR $username == "" OR $password == "") {
 			echo "<p class=\"phpout\">Input Error. Not all required fields given. <a href=\"register.php\">Zurück</a></p>";
+			$connection->close();
 			exit;
 		}
-		$password = md5($password);
+		// sha512 for encryption
+		$password = hash("sha512", $password);
 
-		$result = mysql_query("SELECT * FROM login WHERE username LIKE '$username'");
-		$return = mysql_num_rows($result);
+		$query = $connection->query("SELECT * FROM login WHERE username LIKE '$username'");
+		$return = $query->num_rows;
 
 		if($return == 0)
 		{
 			$entry = "INSERT INTO login (id, username, password) VALUES ('$userid', '$username', '$password')";
-			$entry_success = mysql_query($entry);
+			$entry_success = $connection->query($entry);
 			
 			if($entry_success == true) {
 				echo "<p class=\"phpout\">User <b>$username</b> has been created. <a href=\"index.php\">Login</a></p>";
 			}
 			else {
-				echo "<p class=\"phpout\">Error while trying to save. <a href=\"register.php\">Zurück</a></p>";
-				echo mysql_errno($connection) . ": " . mysql_error($connection) . "\n";
+				echo '<p class=\"phpout\">Error while trying to save. <a href=\"register.php\">Zurück</a></p>';
+				echo $connection->errno . ": " . $connection->error . "\n";
 			}
 		} else {
-			echo "<p class=\"phpout\">Username already in use. <a href=\"register.php\">Zurück</a></p>";
+			echo '<p class=\"phpout\">Username already in use. <a href=\"register.php\">Zurück</a></p>';
 		}
-		mysql_close($connection);
+		$connection->close();
 	}
 ?> 
 
@@ -65,20 +68,19 @@ if(isset($_SESSION['login_user'])){
 						<select name="userid">
 							<option value="" disabled selected>Personal Number</option>
 							<?php
-									
-									$connection = mysql_connect($MySQLHost, $MySQLUser , $MySQLPass)
-									or die("Could not connect to database");
+								$connection = new mysqli($MySQLHost, $MySQLUser , $MySQLPass, $MySQLDB);
+								if ($connection->connect_error) {
+									die('Connect Error (' . $connection->connect_errno . ') '
+									. $connection->connect_error);
+								}
 
-									mysql_select_db("phptest") or die ("Unable to select database");
-
-									$query = sprintf("SELECT id, firstname FROM users");
-									$result = mysql_query($query);
-									
-										while ($row = mysql_fetch_assoc($result)) 
-										{
-											echo "<option>" . $row['id'] . "</option>";
-										}
-									mysql_close($connection);
+								$query = $connection->query('SELECT id, firstname FROM users');
+								
+									while ($row = $query->fetch_array(MYSQL_ASSOC)) 
+									{
+										echo '<option>' . $row['id'] . '</option>';
+									}
+								$connection->close();
 							?> 
 						</select>
 						<input type="text" size="24" maxlength="50" name="username" placeholder="Username"><br><br>

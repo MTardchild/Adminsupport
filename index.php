@@ -42,37 +42,35 @@
 											<b>Trainee</b><br>
 											Usually left default.
 											<?php													
-												$connection = mysql_connect($MySQLHost, $MySQLUser, $MySQLPass);
-												$db = mysql_select_db("phptest", $connection);
+												// Connect to SQL
+												$connection = new mysqli($MySQLHost, $MySQLUser , $MySQLPass, $MySQLDB);
+												if ($connection->connect_error) {
+													die('Connect Error (' . $connection->connect_errno . ') '
+													. $connection->connect_error);
+												}
 
-												$query = sprintf("SELECT id, firstname FROM users");
-												$result = mysql_query($query);
+												$query = $connection->query('SELECT id, firstname FROM users');
 												
-												echo "<select name=\"trainee\"><option value=\"default\">Default</option>";
-												while ($row = mysql_fetch_assoc($result)) {
-												echo "<option value=\"" . $row['id'] . "\">" . $row['id'] . ", " . $row['firstname'] . "</option>";
+												echo '<select name=\"trainee\"><option value=\"default\">Default</option>';
+												while ($row = $query->fetch_array(MYSQL_ASSOC)) {
+												echo '<option value=\"' . $row['id'] . "\">" . $row['id'] . ", " . $row['firstname'] . '</option>';
 												  }
 													echo "</select>";
-												mysql_close($connection); 
 											?>	
 											<b>Task</b><br>
 											<?php													
-												$connection = mysql_connect($MySQLHost, $MySQLUser, $MySQLPass);
-												$db = mysql_select_db("phptest", $connection);
-
-												$query = sprintf("SELECT * FROM tasks");
-												$result = mysql_query($query);
+												$query = $connection->query('SELECT * FROM tasks');
 												
-												echo "<select name=\"task\"><option name=\"default\" value=\"default\" selected>Please Select Task</option>";
-												while ($row = mysql_fetch_assoc($result)) {
-												echo "<option value=\"" . $row['id'] . "\">" . $row['name'] . ", " . $row['score']; 
+												echo '<select name=\"task\"><option name=\"default\" value=\"default\" selected>Please Select Task</option>';
+												while ($row = $query->fetch_array(MYSQL_ASSOC)) {
+												echo '<option value=\"' . $row['id'] . "\">" . $row['name'] . ", " . $row['score']; 
 												if ($row['special'] == 1) {
-													echo ", " . "Special";
+													echo ', Special';
 												}
-												echo "</option>";
+												echo '</option>';
 												  }
-													echo "</select>";
-												mysql_close($connection); 
+													echo '</select>';
+												$connection->close(); 
 											?>	
 											<input type="submit" value="Assign">
 										</form>

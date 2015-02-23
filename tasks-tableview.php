@@ -1,12 +1,14 @@
 <?php
 	include 'MySQLCredentials.php';
-	$connection = mysql_connect($MySQLHost, $MySQLUser, $MySQLPass);
-	$db = mysql_select_db("phptest", $connection);
+	$connection = new mysqli($MySQLHost, $MySQLUser , $MySQLPass, $MySQLDB);
+	if ($connection->connect_error) {
+		die('Connect Error (' . $connection->connect_errno . ') '
+		. $connection->connect_error);
+	}
 
-	$query = sprintf("SELECT * FROM tasks");
-	$result = mysql_query($query);
+	$query = $connection->query('SELECT * FROM tasks');
 	
-	echo "<table>
+	echo '<table>
 	  <thead>
 		<tr><th colspan=\"6\">Tasks</th></tr>
 		<tr>
@@ -16,21 +18,21 @@
 		  <th colspan=\"2\">Special</th>
 		</tr>
 	  </thead>
-	  <tbody>";
-	  while ($row = mysql_fetch_assoc($result)) {
-	echo "
+	  <tbody>';
+	  while ($row = $query->fetch_array(MYSQL_ASSOC)) {
+	echo '
 		<tr>
-			<td>" . $row['id'] . "</td>
-			<td>" . $row['name'] . "</td>
-			<td>" . $row['score'] . "</td>
-			<td>";
-			if($row['special'] == 1) { echo "Yes"; } else { echo "No"; } 
-			echo "</td>
+			<td>' . $row['id'] . '</td>
+			<td>' . $row['name'] . '</td>
+			<td>' . $row['score'] . '</td>
+			<td>';
+			if($row['special'] == 1) { echo 'Yes'; } else { echo 'No'; } 
+			echo '</td>
 		  <td>
-			<a href=\"tasks-delete.php?id=" . $row['id'] . "\" class=\"button\">Delete</a>
+			<a href=\"tasks-delete.php?id=' . $row['id'] . '\" class=\"button\">Delete</a>
 		  </td>
-		</tr>";
+		</tr>';
 	  }
-		echo "</tbody></table>";
-	mysql_close($connection); 
+		echo '</tbody></table>';
+	$connection->close(); 
 ?>

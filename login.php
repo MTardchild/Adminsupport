@@ -9,30 +9,31 @@
 		$username=$_POST['username'];
 		$password=$_POST['password'];
 		
-		// Establishing Connection with Server by passing server_name, user_id and password as a parameter
-		$connection = mysql_connect($MySQLHost, $MySQLUser, $MySQLPass);
+		// Connect to SQL
+		$connection = new mysqli($MySQLHost, $MySQLUser , $MySQLPass, $MySQLDB);
+		if ($connection->connect_error) {
+			die('Connect Error (' . $connection->connect_errno . ') '
+			. $connection->connect_error);
+		}
 		
 		// To protect MySQL injection for Security purpose
 		$username = stripslashes($username);
 		$password = stripslashes($password);
-		$username = mysql_real_escape_string($username);
-		$password = mysql_real_escape_string($password);
+		$username = $connection->real_escape_string($username);
+		$password = $connection->real_escape_string($password);
 		
-		// md5 for encryption
-		$password = md5($password);
-		
-		// Selecting Database
-		$db = mysql_select_db("phptest", $connection);
+		// sha512 for encryption
+		$password = hash("sha512", $password);
 		
 		// SQL query to fetch information of registered users and finds user match.
-		$query = mysql_query("select * from login where password='$password' AND username='$username'", $connection);
-		$rows = mysql_num_rows($query);
+		$query = $connection->query("select * from login where password='$password' AND username='$username'");
+		$rows = $query->num_rows;
 			if ($rows == 1) {
 				$_SESSION['login_user']=$username; // Initializing Session
 				header("location: index.php"); // Redirecting To Other Page
 			} else {
 			$error = "Username or Password is invalid";
 			}
-		mysql_close($connection); // Closing Connection
+		$connection->close(); // Closing Connection
 	}
 ?>

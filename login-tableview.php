@@ -1,10 +1,13 @@
 <?php
 	include 'MySQLCredentials.php';
-	$connection = mysql_connect($MySQLHost, $MySQLUser, $MySQLPass);
-	$db = mysql_select_db("phptest", $connection);
+	// Connect to SQL
+	$connection = new mysqli($MySQLHost, $MySQLUser , $MySQLPass, $MySQLDB);
+	if ($connection->connect_error) {
+		die('Connect Error (' . $connection->connect_errno . ') '
+		. $connection->connect_error);
+	}
 
-	$query = sprintf("SELECT * FROM login");
-	$result = mysql_query($query);
+	$query = $connection->query("SELECT * FROM login");
 	
 	echo "<table>
 	  <thead>
@@ -15,7 +18,7 @@
 		</tr>
 	  </thead>
 	  <tbody>";
-	  while ($row = mysql_fetch_assoc($result)) {
+	  while ($row = $query->fetch_array(MYSQL_ASSOC)) {
 	echo "
 		<tr>
 			<td>" . $row['id'] . "</td>
@@ -26,5 +29,5 @@
 		</tr>";
 	  }
 		echo "</tbody></table>";
-	mysql_close($connection); 
+	$connection->close(); 
 ?>

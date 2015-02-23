@@ -1,5 +1,6 @@
 <?php
-	$MySQLHost = "localhost";
-	$MySQLUser = "root";
-	$MySQLPass = "";
+	$MySQLHost = 'localhost';
+	$MySQLUser = 'root';
+	$MySQLPass = '';
+	$MySQLDB = 'phptest';
 ?>

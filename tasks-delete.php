@@ -1,19 +1,23 @@
 <?php
 		include 'MySQLCredentials.php';
-		$id = $_GET['id'];
-		
-		// Connect to SQL
-		$connection = mysql_connect($MySQLHost, $MySQLUser, $MySQLPass);	
-		
-		// Selecting Database
-		$db = mysql_select_db("phptest", $connection);
-		
-		if(mysql_query("DELETE from tasks WHERE id='$id'")) {
-			echo "Record deleted.";
-		} else {
-			echo mysql_errno($connection) . ": " . mysql_error($connection) . "\n";
-			mysql_close($connection);
+		if($_GET['id'] == "") {
+			echo 'No ID';
 			exit;
 		}
-		mysql_close($connection); // Closing Connection 
+		$id = $_GET['id'];
+		
+		$connection = new mysqli($MySQLHost, $MySQLUser , $MySQLPass, $MySQLDB);
+		if ($connection->connect_error) {
+			die('Connect Error (' . $connection->connect_errno . ') '
+			. $connection->connect_error);
+		}
+		
+		if($connection->query("DELETE from tasks WHERE id='$id'")) {
+			echo 'Record deleted.';
+		} else {
+			echo $connection->errno . ": " . $connection->error . "\n";
+			$connection->close();
+			exit;
+		}
+		$connection->close(); // Closing Connection 
 ?>

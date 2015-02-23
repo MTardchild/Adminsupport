@@ -7,15 +7,15 @@
 	$level = $_POST["level"];
 	$driver = $_POST["driver"];
 
-	// Connect to SQL
-	$connection = mysql_connect($MySQLHost, $MySQLUser, $MySQLPass);	
-	
-	// Selecting Database
-	$db = mysql_select_db("phptest", $connection);
+	$connection = new mysqli($MySQLHost, $MySQLUser , $MySQLPass, $MySQLDB);
+	if ($connection->connect_error) {
+		die('Connect Error (' . $connection->connect_errno . ') '
+		. $connection->connect_error);
+	}
 		
 	// SQL query to fetch information of registered users and finds user match.
-	$query = mysql_query("select * from users where id='$userid'", $connection);
-	$rows = mysql_num_rows($query);
+	$query = $connection->query("select * from users where id='$userid'");
+	$rows = $query->num_rows;
 		if ($rows == 1) {
 			echo "User ID already in use.";
 			exit;
@@ -25,12 +25,12 @@
 				echo "Error: One or more fields empty";
 				exit;
 			}
-			if (mysql_query($query)) {
+			if ($connection->query($query)) {
 				echo "New record created successfully";
 			} else {
-				echo mysql_errno($connection) . ": " . mysql_error($connection) . "\n";
+				echo $connection->errorno . ": " . $connection->error . "\n";
 				exit;
 			}
 		}
-	mysql_close($connection); // Closing Connection
+	$connection->close(); // Closing Connection
 ?>

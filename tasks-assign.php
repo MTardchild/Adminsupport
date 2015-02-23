@@ -10,14 +10,11 @@
 	}
 	
 	// Connect to SQL
-	$connection = new mysqli($MySQLHost, $MySQLUser, '', $MySQLPass);
+	$connection = new mysqli($MySQLHost, $MySQLUser , $MySQLPass, $MySQLDB);
 	if ($connection->connect_error) {
-    die('Connect Error (' . $connection->connect_errno . ') '
-            . $connection->connect_error);
+		die('Connect Error (' . $connection->connect_errno . ') '
+		. $connection->connect_error);
 	}
-		
-	// Selecting Database
-	$db = $connection->select_db('phptest');
 	
 	$query = $connection->query("SELECT score, special FROM tasks WHERE id='$task'");
 	$row = $query->num_rows;
@@ -27,7 +24,7 @@
 		$task_special = $row['special'];
 	} else {
 		echo $connection->errno . ": " . $connection->error . "\n";
-		$connection->close;
+		$connection->close();
 		exit;
 	}
 		
@@ -36,7 +33,7 @@
 		
 		if($query->num_rows == 0){
 		   echo "No trainee available.";
-		   $connection->close;
+		   $connection->close();
 		   exit;
 		}
 		

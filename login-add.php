@@ -5,17 +5,19 @@
 	$username = $_POST["username"];
 	$password = $_POST["password"];
 	
-	$password = md5($password);
+	// sha512 for encryption
+	$password = hash("sha512", $password);
 
 	// Connect to SQL
-	$connection = mysql_connect($MySQLHost, $MySQLUser, $MySQLPass);	
-	
-	// Selecting Database
-	$db = mysql_select_db("phptest", $connection);
+	$connection = new mysqli($MySQLHost, $MySQLUser , $MySQLPass, $MySQLDB);
+	if ($connection->connect_error) {
+		die('Connect Error (' . $connection->connect_errno . ') '
+		. $connection->connect_error);
+	}
 		
 	// SQL query to fetch information of registered users and finds user match.
-	$query = mysql_query("select * from login where id='$userid'", $connection);
-	$rows = mysql_num_rows($query);
+	$query = $connection->query("select * from login where id='$userid'");
+	$rows = $query->num_rows;
 		if ($rows == 1) {
 			echo "User ID already in use.";
 		} else {
@@ -24,12 +26,12 @@
 				echo "Error: One or more fields empty";
 				exit;
 			}
-			if (mysql_query($query)) {
+			if ($query) {
 				echo "New record created successfully";
 			} else {
-				echo mysql_errno($connection) . ": " . mysql_error($connection) . "\n";	
+				echo $connection->errno . ": " . $connection->error . "\n";	
 			}
 		}
-	mysql_close($connection); // Closing Connection
+	$connection->close(); // Closing Connection
 	exit;
 ?>

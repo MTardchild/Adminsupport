@@ -1,5 +1,6 @@
 <?php
 	if(isset($_SESSION['login_user'])){ 
+		include('session.php');
 	} else {
 		include('login.php'); // Login Script
 	}
@@ -18,9 +19,6 @@
 	<body>
 		<!-- If logged in -->
 		<?php
-			if(isset($_SESSION['login_user'])){
-				include('session.php');
-				// Navi 
 				include('navi.html');
 		?>
 		<!-- Content -->
@@ -70,7 +68,7 @@
 							
 		<!-- If _not_ logged in -->
 		<?php
-			} else {
+			if(!isset($_SESSION['login_user'])){ 
 				header('Location: index.php'); // Redirecting To Home Page
 			}
 		?>
