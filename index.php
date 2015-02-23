@@ -108,10 +108,10 @@
 						<?php
 							include 'log-tableview.php';
 						?>
-						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 	<footer>
 		
 	</footer>

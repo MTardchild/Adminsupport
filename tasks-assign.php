@@ -55,6 +55,5 @@
 			echo 'Mail: Failure <br>';
 		}
 	}
-	
 	$connection->close(); // Closing Connection 
 ?>
