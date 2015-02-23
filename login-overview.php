@@ -7,15 +7,13 @@
 ?>
 <!DOCTYPE html>
 <html>
-	<head>
-	<title>Admin Support</title>
-	<link href="style.css" rel="stylesheet">
-	
-	<!-- IE6-8 support of HTML5 elements --> <!--[if lt IE 9]>
-    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-	</head>
+	<?php include('head.html'); ?>	
+	<!-- If _not_ logged in -->
+	<?php
+		if(!isset($_SESSION['login_user'])){
+			header('Location: index.php'); // Redirecting To Home Page
+		}
+	?>
 	<body>
 	<!-- If logged in -->
 	<?php
@@ -33,13 +31,6 @@
 				</div>
 			</div>
 		</div>
-						
-	<!-- If _not_ logged in -->
-	<?php
-		if(!isset($_SESSION['login_user'])){
-			header('Location: index.php'); // Redirecting To Home Page
-		}
-	?>
 	<footer>
 		
 	</footer>

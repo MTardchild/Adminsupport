@@ -54,11 +54,7 @@ if(isset($_SESSION['login_user'])){
 
 <!doctype html>
 <html lang="de">
-	<head>
-		<title>Register</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="style.css">
-	</head>
+	<?php include('head.html'); ?>	
 	<body>
 		<div id="outer">
 			<div id="middle">
