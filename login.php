@@ -1,6 +1,4 @@
 <?php
-	include 'MySQLCredentials.php';
-
 	session_start(); // Starting Session
 	$error=''; // Variable To Store Error Message
 	if (isset($_POST['submit'])) {
@@ -10,11 +8,7 @@
 		$password=$_POST['password'];
 		
 		// Connect to SQL
-		$connection = new mysqli($MySQLHost, $MySQLUser , $MySQLPass, $MySQLDB);
-		if ($connection->connect_error) {
-			die('Connect Error (' . $connection->connect_errno . ') '
-			. $connection->connect_error);
-		}
+		include 'MySQLCredentials.php';
 		
 		// To protect MySQL injection for Security purpose
 		$username = stripslashes($username);

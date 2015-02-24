@@ -1,17 +1,12 @@
 <?php
-	include 'MySQLCredentials.php';
 	// Connect to SQL
-	$connection = new mysqli($MySQLHost, $MySQLUser , $MySQLPass, $MySQLDB);
-	if ($connection->connect_error) {
-		die('Connect Error (' . $connection->connect_errno . ') '
-		. $connection->connect_error);
-	}
+	include 'MySQLCredentials.php';
 
-	$query = $connection->query("SELECT * FROM log a INNER JOIN users b ON a.user_id = b.user_id INNER JOIN tasks c ON a.task_id = c.task_id ORDER BY date DESC ");
+	$query = $connection->query("SELECT * FROM $log a INNER JOIN $users b ON a.user_id = b.user_id INNER JOIN $tasks c ON a.task_id = c.task_id ORDER BY date DESC");
 
-	echo "<div class=\"log\"><table>
+	echo '<div class=\'log\'><table>
 	  <thead>
-		<tr><th colspan=\"6\">Log</th></tr>
+		<tr><th colspan=\'6\'>Log</th></tr>
 		<tr>
 		  <th>#</th>
 		  <th>Task</th>
@@ -19,20 +14,20 @@
 		  <th colspan=\"2\">Date</th>
 		</tr>
 	  </thead>
-	  <tbody>";
+	  <tbody>';
 	  while ($row = $query->fetch_array(MYSQLI_ASSOC)) {
-	echo "
+	echo '
 	
 		<tr>
-			<td>" . $row['log_id'] . "</td>
-			<td>" . $row['name'] . "</td>
-			<td>" . $row['firstname'] . "</td>
-			<td>" . $row['date'] . "</td>
+			<td>' . $row['log_id'] . '</td>
+			<td>' . $row['name'] . '</td>
+			<td>' . $row['firstname'] . '</td>
+			<td>' . $row['date'] . '</td>
 		  <td>
-			<a href=\"log-delete.php?id=" . $row['log_id'] . "\" class=\"button\">Delete</a>
+			<a href=\'log-delete.php?id=' . $row['log_id'] . '\' class=\'button\'>Delete</a>
 		  </td>
-		</tr>";
+		</tr>';
 	  }
-	echo "</tbody></table></div>";
+	echo '</tbody></table></div>';
 	$connection->close(); 
 ?>

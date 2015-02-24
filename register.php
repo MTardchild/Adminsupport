@@ -5,17 +5,11 @@ if(isset($_SESSION['login_user'])){
 ?>
 
 <?php
-	include 'MySQLCredentials.php';
-
 	session_start(); // Starting Session
 	$_SESSION['error'] = ""; // Variable To Store Error Message
 		
 	if (isset($_POST['submit'])) {
-		$connection = new mysqli($MySQLHost, $MySQLUser , $MySQLPass, $MySQLDB);
-		if ($connection->connect_error) {
-			die('Connect Error (' . $connection->connect_errno . ') '
-			. $connection->connect_error);
-		}
+		include 'MySQLCredentials.php';
 
 		$userid = $_POST["userid"];
 		$username = $_POST["username"];
@@ -30,12 +24,12 @@ if(isset($_SESSION['login_user'])){
 		// sha512 for encryption
 		$password = hash("sha512", $password);
 
-		$query = $connection->query("SELECT * FROM login WHERE username LIKE '$username'");
+		$query = $connection->query("SELECT * FROM $login WHERE username LIKE '$username'");
 		$return = $query->num_rows;
 
 		if($return == 0)
 		{
-			$entry = "INSERT INTO login (user_id, username, password) VALUES ('$userid', '$username', '$password')";
+			$entry = "INSERT INTO $login (user_id, username, password) VALUES ('$userid', '$username', '$password')";
 			$entry_success = $connection->query($entry);
 			
 			if($entry_success == true) {
@@ -64,15 +58,11 @@ if(isset($_SESSION['login_user'])){
 						<select name="userid">
 							<option value="" disabled selected>Personal Number</option>
 							<?php
-								$connection = new mysqli($MySQLHost, $MySQLUser , $MySQLPass, $MySQLDB);
-								if ($connection->connect_error) {
-									die('Connect Error (' . $connection->connect_errno . ') '
-									. $connection->connect_error);
-								}
+								include('MySQLConnect.php');
 
-								$query = $connection->query('SELECT user_id, firstname FROM users');
+								$query = $connection->query("SELECT user_id, firstname FROM $users");
 								
-									while ($row = $query->fetch_array(MYSQL_ASSOC)) 
+									while ($row = $query->fetch_array(MYSQLI_ASSOC)) 
 									{
 										echo '<option>' . $row['user_id'] . '</option>';
 									}

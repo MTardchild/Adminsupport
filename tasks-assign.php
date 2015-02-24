@@ -1,6 +1,4 @@
-<?php
-	include 'MySQLCredentials.php';
-	
+<?php	
 	$trainee = $_POST['trainee'];
 	$task = $_POST['task'];
 	
@@ -10,13 +8,9 @@
 	}
 	
 	// Connect to SQL
-	$connection = new mysqli($MySQLHost, $MySQLUser , $MySQLPass, $MySQLDB);
-	if ($connection->connect_error) {
-		die('Connect Error (' . $connection->connect_errno . ') '
-		. $connection->connect_error);
-	}
+	include 'MySQLCredentials.php';
 	
-	$query = $connection->query("SELECT score, special FROM tasks WHERE task_id='$task'");
+	$query = $connection->query("SELECT score, special FROM $tasks WHERE task_id='$task'");
 	$row = $query->num_rows;
 
 	if ($query) {
@@ -29,15 +23,15 @@
 	}
 		
 	if ($trainee == 'default') {
-		$query = $connection->query('SELECT user_id, score, available FROM users WHERE available=\'1\' ORDER BY score');
+		$query = $connection->query("SELECT user_id, score, available FROM $users WHERE available=\'1\' ORDER BY score");
 		
 		if($query->num_rows == 0){
-		   echo "No trainee available.";
+		   echo 'No trainee available.';
 		   $connection->close();
 		   exit;
 		}
 		
-		$row = $query->fetch_array(MYSQL_ASSOC);
+		$row = $query->fetch_array(MYSQLI_ASSOC);
 		
 		echo 'Lowballer/Trainee selected: ' . $row['user_id'] . '<br>';
 	

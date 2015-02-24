@@ -41,13 +41,13 @@
 		<div id="outer">
 			<div id="middle">
 				<div id="welcomemessage">
-					<div class="smallcard">
 					<?php 
 						if($_SESSION['rights'] == 1) {
-							include('task-assign-table.html');
+							echo '<div class=\'smallcard\'>';
+									include('task-assign-table.html');
+							echo '</div>';
 						}
 					?>
-					</div>
 					<div class="smallcard">
 						<div id="welcomestring">
 							<p>

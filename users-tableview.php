@@ -1,12 +1,7 @@
 <?php
 	include 'MySQLCredentials.php';
-	$connection = new mysqli($MySQLHost, $MySQLUser , $MySQLPass, $MySQLDB);
-	if ($connection->connect_error) {
-		die('Connect Error (' . $connection->connect_errno . ') '
-		. $connection->connect_error);
-	}
 
-	$query = $connection->query("SELECT * FROM users");
+	$query = $connection->query("SELECT * FROM $users");
 	
 	echo '<table>
 	  <thead>
@@ -22,7 +17,7 @@
 		</tr>
 	  </thead>
 	  <tbody>';
-	  while ($row = $query->fetch_array(MYSQL_ASSOC)) {
+	  while ($row = $query->fetch_array(MYSQLI_ASSOC)) {
 	echo '
 		<tr>
 			<td>' . $row['user_id'] . '</td>

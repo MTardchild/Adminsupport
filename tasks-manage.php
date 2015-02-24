@@ -11,7 +11,7 @@
 	<body>
 		<!-- If logged in -->
 		<?php
-				include('navi.html');
+			include('navi.html');
 		?>
 		<!-- Content -->
 			<div id="outer">

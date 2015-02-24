@@ -1,12 +1,11 @@
 <?php
 	include 'MySQLCredentials.php';
-	$connection = new mysqli($MySQLHost, $MySQLUser , $MySQLPass, $MySQLDB);
-	if ($connection->connect_error) {
-		die('Connect Error (' . $connection->connect_errno . ') '
-		. $connection->connect_error);
+	
+	$query = $connection->query("SELECT * FROM $tasks");
+	
+	if (!$query) {
+		echo 'SQL Error' . $connection->error;
 	}
-
-	$query = $connection->query('SELECT * FROM tasks');
 	
 	echo '<table>
 	  <thead>
@@ -19,7 +18,7 @@
 		</tr>
 	  </thead>
 	  <tbody>';
-	  while ($row = $query->fetch_array(MYSQL_ASSOC)) {
+	  while ($row = $query->fetch_array(MYSQLI_ASSOC)) {
 	echo '
 		<tr>
 			<td>' . $row['task_id'] . '</td>
