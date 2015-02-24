@@ -57,7 +57,25 @@
 								<b id="welcome">Welcome: <i><?php echo $_SESSION['user_name']; ?></i></b>
 							</p>
 							<p>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non ligula rhoncus, molestie diam sed, pharetra turpis. Morbi cursus neque tincidunt lorem porttitor egestas.
+								Your Rights:
+								<?php if($_SESSION['rights'] == 1) { echo ' Admin'; } else { echo ' User'; } ?>
+							</p>
+							<?php if($_SESSION['rights'] == 0) {
+							echo'<p>
+								Your Score: ';
+									include 'MySQLConnect.php';
+									
+									$id = $_SESSION['user_id'];
+									if($query = $connection->query("SELECT score from $users WHERE user_id='$id'")) {
+										echo $query->fetch_array(MYSQLI_ASSOC)['score'];
+									} else {
+										echo $connection->errorno . ": " . $connection->error . "\n";
+										$connection->close();
+										exit;
+									}
+									$connection->close(); // Closing Connection
+							}
+								?>
 							</p>			
 						</div>
 					</div>
