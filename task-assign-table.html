@@ -30,9 +30,9 @@
 					<?php													
 						$query = $connection->query('SELECT * FROM tasks');
 						
-						echo '<select name=\'task\'><option name=\'default\' value=\'default\' selected>Please Select Task</option>';
+						echo '<select name=\'task\'><option name=\'default\' value=\'default\' selected disabled>Please Select Task</option>';
 						while ($row = $query->fetch_array(MYSQLI_ASSOC)) {
-						echo '<option value=\'' . $row['user_id'] . '\'>' . $row['name'] . ', ' . $row['score']; 
+						echo '<option value=\'' . $row['task_id'] . '\'>' . $row['name'] . ', ' . $row['score']; 
 						if ($row['special'] == 1) {
 							echo ', Special';
 						}
@@ -42,9 +42,8 @@
 						$connection->close(); 
 					?>
 					<b>Time</b><br>
-					Not functional by now.<br>
-					<div class="column"><input type="date" name="date" value="2015-12-31"></div>
-					<div class="column"><input type="time" name="time" value="23:59:59"></div>
+					<div class="column"><input type="date" name="date" placeholder="<?php echo date('Y-m-d'); ?>" value=""></div>
+					<div class="column"><input type="time" name="time" placeholder="<?php echo date('G:i:s'); ?>" value=""></div>
 					
 					<input type="submit" value="Assign">
 				</form>
