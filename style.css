@@ -11,6 +11,7 @@
 body {
 	background-color: #292e2e;
 	font-family: 'Open Sans', sans-serif;
+	-webkit-font-smoothing: antialiased;
 	color: #FFFFFF;
 }
 
@@ -27,7 +28,7 @@ i {
 }
 
 b {
-	font-weight: bold;
+	font-weight: 600;
 }
 
 form {
@@ -132,8 +133,8 @@ td:last-child {
 
 #nav {
 	position: relative;
-	width: 450px;
-	height: 39px;
+	width: 470px;
+	height: 40px;
 	margin: -1px auto;
 }
 
@@ -164,8 +165,8 @@ ul#navigation {
 
 ul#navigation li {
 	display:inline;
-	font-size:12px;
-	font-weight:bold;
+	font-size:13px;
+	font-weight:400;
 	margin:0;
 	padding:0;
 	float:left;
