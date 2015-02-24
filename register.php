@@ -9,7 +9,7 @@ if(isset($_SESSION['user_id'])){
 	$_SESSION['error'] = ""; // Variable To Store Error Message
 		
 	if (isset($_POST['submit'])) {
-		include 'MySQLCredentials.php';
+		include('MySQLCredentials.php');
 
 		$userid = $_POST["userid"];
 		$username = $_POST["username"];
@@ -54,11 +54,11 @@ if(isset($_SESSION['user_id'])){
 			<div id="middle">
 				<div id="content">
 					<h2>Register</h2>
-					<form action="" method="post">
+					<form action="" method="post" class="register">
 						<select name="userid">
 							<option value="" disabled selected>Personal Number</option>
 							<?php
-								include('MySQLConnect.php');
+								include('MySQLCredentials.php');
 
 								$query = $connection->query("SELECT user_id, firstname FROM $users");
 								
@@ -67,7 +67,7 @@ if(isset($_SESSION['user_id'])){
 										echo '<option>' . $row['user_id'] . '</option>';
 									}
 								$connection->close();
-							?> 
+							?>
 						</select>
 						<input type="text" size="24" maxlength="50" name="username" placeholder="Username"><br><br>
 

@@ -144,6 +144,18 @@ td:last-child {
 	box-shadow: 0px 7px 10px 0px rgba(0,0,0,0.75);
 }
 
+.register input[type=text], .register input[type=password] {
+	width: 428px;
+	margin: 5px 0px 5px 0px;
+	padding: 5px;
+}
+
+.register select {
+	width: 440px;
+	margin: 5px 0px 5px 0px;
+	padding: 5px;
+}
+
 ul#navigation {
 	margin:0px auto;
 	border-left:1px solid #c4dbe7;
