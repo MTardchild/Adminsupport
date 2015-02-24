@@ -1,4 +1,6 @@
 <?php	
+	include('rights.php');
+	
 	$userid = $_POST["user_id"];
 	$firstname = $_POST["firstname"];
 	$lastname = $_POST["lastname"];

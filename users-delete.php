@@ -1,4 +1,6 @@
 <?php
+	include('rights.php');
+	
 	$id = $_GET['id'];
 	
 	include 'MySQLCredentials.php';

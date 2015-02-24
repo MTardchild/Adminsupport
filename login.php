@@ -22,18 +22,20 @@
 		// SQL query to fetch information of registered users and finds user match.
 		$query = $connection->query("select * from login where password='$password' AND username='$username'");
 		$rows = $query->num_rows;
-			if ($rows == 1) {
-				$_SESSION['login_user']=$username; // Initializing Session
-				
-				$query = $connection->query("SELECT rights FROM login WHERE username='$username'");
-				$row = $query->fetch_array(MYSQLI_ASSOC);
-				
-				$_SESSION['rights'] = $row['rights'];
-				
-				header("location: index.php"); // Redirecting To Other Page
-			} else {
-			$error = "Username or Password is invalid";
-			}
+		if ($rows == 1) {				
+			$query = $connection->query("SELECT * FROM login WHERE username='$username'");
+			$row = $query->fetch_array(MYSQLI_ASSOC);
+			
+			$_SESSION['user_id']=$row['user_id']; // Initializing Session
+			$_SESSION['user_name']=$row['username']; // Initializing Session			
+			$_SESSION['rights'] = $row['rights'];
+			$_SESSION['created'] = time();
+			$_SESSION['last_activity'] = time();
+			
+			header("location: index.php"); // Redirecting To Other Page
+		} else {
+		$error = "Username or Password is invalid";
+		}
 		$connection->close(); // Closing Connection
 	}
 ?>

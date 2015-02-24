@@ -1,4 +1,6 @@
 <?php	
+	include('rights.php');
+	
 	$taskid = $_POST["task_id"];
 	$taskname = $_POST["taskname"];
 	$score = $_POST["score"];

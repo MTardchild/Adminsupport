@@ -1,5 +1,5 @@
 <?php
-	if(!isset($_SESSION['login_user'])){
+	if(!isset($_SESSION['user_id'])){
 		include('login.php'); // Login Script		
 	}
 ?>
@@ -9,7 +9,7 @@
 	<body>
 	<!-- If _not_ logged in -->
 	<?php
-		if(!isset($_SESSION['login_user'])) {
+		if(!isset($_SESSION['user_id'])) {
 	?>
 		<div id="outer">
 			<div id="middle">
@@ -34,24 +34,27 @@
 	<!-- If logged in -->
 	<?php 
 		include('navi.html');	
-		include('session.php'); 
+		include('session.php');
+		include('session-regenerate.php');
 	?>
 		
 	<!-- Content -->
 		<div id="outer">
 			<div id="middle">
 				<div id="welcomemessage">
-					<?php 
-						if($_SESSION['rights'] == 1) {
-							echo '<div class=\'smallcard\'>';
-									include('task-assign-table.html');
-							echo '</div>';
-						}
-					?>
+					<div class='smallcard'>
+						<?php 
+							if($_SESSION['rights'] == 1) {
+								include('task-assign-table.html');
+							} else {
+								include('users-tasks.php');
+							}
+						?>
+					</div>
 					<div class="smallcard">
 						<div id="welcomestring">
 							<p>
-								<b id="welcome">Welcome: <i><?php echo $login_session; ?></i></b>
+								<b id="welcome">Welcome: <i><?php echo $_SESSION['user_name']; ?></i></b>
 							</p>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non ligula rhoncus, molestie diam sed, pharetra turpis. Morbi cursus neque tincidunt lorem porttitor egestas.
@@ -62,7 +65,7 @@
 				<div id="dashboard">
 					<div class="card">
 						<?php
-							include 'log-tableview.php';
+							include('log-tableview.php');
 						?>
 					</div>
 				</div>

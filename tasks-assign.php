@@ -1,4 +1,6 @@
 <?php	
+	include('rights.php');
+	
 	$trainee = $_POST['trainee'];
 	$task = $_POST['task'];
 	

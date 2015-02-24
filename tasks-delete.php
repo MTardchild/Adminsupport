@@ -1,4 +1,6 @@
 <?php
+	include('rights.php');
+	
 	if($_GET['id'] == "") {
 		echo 'No ID';
 		exit;
