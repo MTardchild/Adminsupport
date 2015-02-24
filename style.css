@@ -240,6 +240,10 @@ ul#navigation ul li a {
 	float: left;
 }
 
+.restricted {
+	text-align: center;
+}
+
 .phpout {
 	text-align: center;
 }

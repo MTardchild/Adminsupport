@@ -18,9 +18,9 @@
 		<tr>
 			<td>' . $row['user_id'] . '</td>
 			<td>' . $row['username'] . '</td>
-		  <td>
-			<a href=\'login-delete.php?id=' . $row['user_id'] . '\' class=\'button\'>Delete</a>
-		  </td>
+		  <td>';
+			if($_SESSION['rights'] == 1) { echo '<a href=\'login-delete.php?id=' . $row['user_id'] . '\' class=\'button\'>Delete</a>'; }
+		  echo '</td>
 		</tr>';
 	  }
 		echo '</tbody></table>';

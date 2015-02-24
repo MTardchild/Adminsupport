@@ -11,7 +11,7 @@
 		  <th>#</th>
 		  <th>Task</th>
 		  <th>User</th>
-		  <th colspan=\"2\">Date</th>
+		  <th colspan=\'2\'>Date</th>
 		</tr>
 	  </thead>
 	  <tbody>';
@@ -23,9 +23,9 @@
 			<td>' . $row['name'] . '</td>
 			<td>' . $row['firstname'] . '</td>
 			<td>' . $row['date'] . '</td>
-		  <td>
-			<a href=\'log-delete.php?id=' . $row['log_id'] . '\' class=\'button\'>Delete</a>
-		  </td>
+		  <td>';
+			if($_SESSION['rights'] == 1) { echo '<a href=\'log-delete.php?id=' . $row['log_id'] . '\' class=\'button\'>Delete</a>'; }
+		  echo '</td>
 		</tr>';
 	  }
 	echo '</tbody></table></div>';

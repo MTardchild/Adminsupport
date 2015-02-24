@@ -19,6 +19,10 @@
 			<div id="outer">
 				<div id="middle">
 					<div id="dashboard">
+					<?php 			
+						if($_SESSION['rights'] == 1) 
+						{
+					?>
 						<div class="smallcard">
 							<table class="contenttable">
 								<thead>
@@ -54,7 +58,17 @@
 						<div class="smallcard">
 							<?php
 								include 'login-tableview.php';
+						} else {
 							?>
+							<div class="restricted">
+								<p>
+									<b id="welcome">Restricted.</b>
+								</p>
+								<p>
+									User <b><?php echo $_SESSION['login_user']; ?></b> does not have the rights to access this area.
+								</p>
+							</div>
+						<?php } ?>
 						</div>
 					</div>
 				</div>

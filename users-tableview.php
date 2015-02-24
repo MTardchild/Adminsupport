@@ -31,9 +31,9 @@
 			if($row['available'] == 1) { echo 'Yes'; } else { echo 'No'; } 
 			echo '</td>
 			<td>' . $row['score'] . '</td>
-		  <td>
-			<a href=\'users-delete.php?id=' . $row['user_id'] . '\' class=\'button\'>Delete</a>
-		  </td>
+		  <td>';
+			if($_SESSION['rights'] == 1) { echo '<a href=\'users-delete.php?id=' . $row['user_id'] . '\' class=\'button\'>Delete</a>'; }
+		  echo '</td>
 		</tr>';
 	  }
 	echo '</tbody></table>';
