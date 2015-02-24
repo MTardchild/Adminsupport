@@ -54,15 +54,15 @@
 					<div class="smallcard">
 						<div id="welcomestring">
 							<p>
-								<b id="welcome">Welcome: <i><?php echo $_SESSION['user_name']; ?></i></b>
+								<b id="welcome">Welcome <?php echo $_SESSION['user_name'] . '!'; ?></b>
 							</p>
 							<p>
-								Your Rights:
+								<b>Your Rights:</b>
 								<?php if($_SESSION['rights'] == 1) { echo ' Admin'; } else { echo ' User'; } ?>
 							</p>
 							<?php if($_SESSION['rights'] == 0) {
 							echo'<p>
-								Your Score: ';
+								<b>Your Score:</b> ';
 									include 'MySQLConnect.php';
 									
 									$id = $_SESSION['user_id'];
