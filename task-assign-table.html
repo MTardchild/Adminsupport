@@ -9,7 +9,7 @@
 			<td>
 				<form action="tasks-assign.php" class="adduser" method="post">
 					<b>Trainee</b><br>
-					Usually left default.
+					Usually left default.<br>
 					<?php	
 						// Connect to SQL
 						$connection = new mysqli($MySQLHost, $MySQLUser , $MySQLPass, $MySQLDB);
@@ -40,7 +40,12 @@
 						  }
 							echo '</select>';
 						$connection->close(); 
-					?>	
+					?>
+					<b>Time</b><br>
+					Not functional by now.<br>
+					<div class="column"><input type="date" name="date" value="2015-12-31"></div>
+					<div class="column"><input type="time" name="time" value="23:59:59"></div>
+					
 					<input type="submit" value="Assign">
 				</form>
 			</td>

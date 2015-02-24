@@ -26,6 +26,10 @@ i {
 	color:#6495ed;
 }
 
+b {
+	font-weight: bold;
+}
+
 form {
     display: inline-block;
     text-align: center;
@@ -35,7 +39,7 @@ form {
 form select {
 	margin: 8px 0px 18px 0px;
 	width: 450px;
-	padding: 5px;
+	padding: 8px 5px 8px 5px;
 	border: 1px solid #ccc;
 }
 
@@ -62,8 +66,14 @@ input[type=text], input[type=password] {
 	padding: 10px;
 	margin: 3px auto 10px auto;
 	border:1px solid #ccc;
-	border-radius:5px;
 	font-size:16px;
+}
+
+input[type=date], input[type=time] {
+	width: 100%;
+	padding: 8px 5px 8px 5px;
+	margin: 8px 0px 18px 0px;
+	border: 1px solid #ccc;
 }
 
 input[type=submit] {

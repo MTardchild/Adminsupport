@@ -3,14 +3,13 @@
 	include 'MySQLCredentials.php';
 	
 	// Storing Session
-	$user_check=$_SESSION['login_user'];
+	$user_check=$_SESSION['user_id'];
 	
 	// SQL Query To Fetch Complete Information Of User
-	$query = $connection->query("SELECT username FROM $login WHERE username='$user_check'");
+	$query = $connection->query("SELECT user_id FROM $login WHERE user_id='$user_check'");
 	$row = $query->fetch_array(MYSQLI_ASSOC);
-	$login_session =$row['username'];
 	
-	if(!isset($login_session)){
+	if(!isset($row['user_id'])) {
 		$connection->close(); // Closing Connection
 		header('Location: index.php'); // Redirecting To Home Page
 	}

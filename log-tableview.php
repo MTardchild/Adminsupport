@@ -2,7 +2,7 @@
 	// Connect to SQL
 	include 'MySQLCredentials.php';
 
-	$query = $connection->query("SELECT * FROM $log a INNER JOIN $users b ON a.user_id = b.user_id INNER JOIN $tasks c ON a.task_id = c.task_id ORDER BY date DESC");
+	$query = $connection->query("SELECT * FROM $log a INNER JOIN $users b ON a.user_id = b.user_id INNER JOIN $tasks c ON a.task_id = c.task_id WHERE a.done='1' ORDER BY date DESC");
 
 	echo '<div class=\'log\'><table>
 	  <thead>

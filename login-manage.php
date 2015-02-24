@@ -1,5 +1,5 @@
 <?php
-	if(isset($_SESSION['login_user'])){ 
+	if(isset($_SESSION['user_id'])){ 
 	} else {
 		include('login.php'); // Login Script
 	}
@@ -10,7 +10,7 @@
 	<body>
 		<!-- If logged in -->
 		<?php
-			if(isset($_SESSION['login_user'])){
+			if(isset($_SESSION['user_id'])){
 				include('session.php');
 				// Navi 
 				include('navi.html');
@@ -65,7 +65,7 @@
 									<b id="welcome">Restricted.</b>
 								</p>
 								<p>
-									User <b><?php echo $_SESSION['login_user']; ?></b> does not have the rights to access this area.
+									User <b><?php echo $_SESSION['user_name']; ?></b> does not have the rights to access this area.
 								</p>
 							</div>
 						<?php } ?>

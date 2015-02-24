@@ -1,5 +1,5 @@
 <?php
-	if(isset($_SESSION['login_user'])){ 
+	if(isset($_SESSION['user_id'])){ 
 	} else {
 		include('login.php'); // Login Script
 	}
@@ -10,7 +10,7 @@
 	<body>
 	<!-- If logged in -->
 	<?php
-		if(isset($_SESSION['login_user'])){
+		if(isset($_SESSION['user_id'])){
 			include('session.php');
 			// Navi 
 			include('navi.html');

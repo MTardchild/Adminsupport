@@ -1,5 +1,5 @@
 <?php
-	if(isset($_SESSION['login_user'])){ 
+	if(isset($_SESSION['user_id'])){ 
 		include('session.php');
 	} else {
 		include('login.php'); // Login Script
@@ -64,7 +64,7 @@
 									<b id="welcome">Restricted.</b>
 								</p>
 								<p>
-									User <b><?php echo $_SESSION['login_user']; ?></b> does not have the rights to access this area.
+									User <b><?php echo $_SESSION['user_name']; ?></b> does not have the rights to access this area.
 								</p>
 							</div>
 						<?php } ?>
@@ -75,7 +75,7 @@
 							
 		<!-- If _not_ logged in -->
 		<?php
-			if(!isset($_SESSION['login_user'])){ 
+			if(!isset($_SESSION['user_id'])){ 
 				header('Location: index.php'); // Redirecting To Home Page
 			}
 		?>

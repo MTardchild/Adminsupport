@@ -1,5 +1,5 @@
 <?php
-	if(isset($_SESSION['login_user'])){
+	if(isset($_SESSION['user_id'])){
 		include('session.php');
 	} else {
 		include('login.php'); // Login Script
@@ -10,7 +10,7 @@
 	<?php include('head.html'); ?>	
 	<!-- If _not_ logged in -->
 	<?php
-		if(!isset($_SESSION['login_user'])){
+		if(!isset($_SESSION['user_id'])){
 			header('Location: index.php'); // Redirecting To Home Page
 		}
 	?>
