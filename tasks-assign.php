@@ -63,8 +63,6 @@
 	$row = $query->fetch_array(MYSQLI_BOTH);
 	$log_id = $row[0] + 1;
 	
-	echo "INSERT INTO log (log_id, task_id, user_id, date, done) VALUES ('$log_id', '$task', '$trainee', '$date', '0')";
-	
 	if($query = $connection->query("INSERT INTO log (log_id, task_id, user_id, date, done) VALUES ('$log_id', '$task', '$trainee', '$date', '0')")) {
 		echo 'Task successfully assigned';
 	} else {
