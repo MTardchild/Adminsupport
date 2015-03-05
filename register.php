@@ -40,9 +40,6 @@ if(isset($_SESSION['user_id'])){
 				$_SESSION['error'] .= '<br>' . PHP_EOL . 'Passwords do not match.';
 			}
 		}
-		
-		// sha512 for encryption
-		$password = hash("sha512", $password);
 
 		$query = $connection->query("SELECT * FROM $login WHERE username LIKE '$username'");
 		$return = $query->num_rows;
@@ -65,6 +62,9 @@ if(isset($_SESSION['user_id'])){
 				$_SESSION['error'] .= '<br>' . PHP_EOL . 'User ID already in use.';
 			}
 		}
+		
+		// sha512 for encryption
+		$password = hash("sha512", $password);
 		
 		$connection->close();
 		
@@ -122,6 +122,9 @@ if(isset($_SESSION['user_id'])){
 						<input type="password" size="24" maxlength="50" name="password2" placeholder="Retype Password" value=""><br>
 						<input name="submit" type="submit" value="Sign up">
 					</form>
+					<div id="register">
+						<a href="index.php">Login</a> | <a href="">Forgot Password?</a>
+					</div>
 				</div>
 			</div>
 		</div>
