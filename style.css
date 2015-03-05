@@ -328,18 +328,26 @@ ul#navigation ul li a {
 	padding: 15px;
 }
 
+#welcomemessage > .smallcard {
+	width: 52%
+}
+
+#welcomemessage > .smallcard ~ .smallcard {
+	width: 40%
+}
+
 .smallcard {
 	width: 44%; 
 	float: left;
 	text-align: left;
-	margin: 1% 1% 1% 1%;
+	margin: 1% 2%;
 }
 
 .card {
 	width: 96%;
 	float: left;
 	text-align: center;
-	margin: 1%;
+	margin: 1% 2%;
 }
 
 .contenttable {
@@ -388,6 +396,7 @@ ul#navigation ul li a {
 
 #register {
 	text-align: right;
+	padding-top: 2%;
 }
 
 #welcomemessage {
@@ -397,6 +406,7 @@ ul#navigation ul li a {
 	margin-right: auto;
 	padding: 10px 2%;
 	overflow: auto;
+}
 }
 
 #content {
