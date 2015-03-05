@@ -26,11 +26,12 @@
 			$query = $connection->query("SELECT * FROM login WHERE username='$username'");
 			$row = $query->fetch_array(MYSQLI_ASSOC);
 			
-			$_SESSION['user_id']=$row['user_id']; // Initializing Session
-			$_SESSION['user_name']=$row['username']; // Initializing Session			
+			$_SESSION['user_id'] = $row['user_id']; // Initializing Session
+			$_SESSION['user_name'] = $row['username']; // Initializing Session			
 			$_SESSION['rights'] = $row['rights'];
 			$_SESSION['created'] = time();
 			$_SESSION['last_activity'] = time();
+			$_SESSION['error'] = ''; // Variable To Store Error Message
 			
 			header("location: index.php"); // Redirecting To Other Page
 		} else {

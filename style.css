@@ -32,15 +32,12 @@ b {
 }
 
 form {
-    display: inline-block;
-    text-align: center;
-	line-height: 20px;
+	line-height: 24px;
 }
 
 form select {
-	margin: 8px 0px 18px 0px;
 	width: 450px;
-	padding: 8px 5px 8px 5px;
+	padding: 12px 5px 12px 5px;
 	border: 1px solid #ccc;
 }
 
@@ -112,6 +109,10 @@ thead tr:first-child {
   border: none;
 }
 
+input {
+	box-sizing:border-box;
+} 
+
 th {font-weight: bold;}
 th:first-child, td:first-child {padding: 0 15px 0 20px;}
 
@@ -146,15 +147,17 @@ td:last-child {
 }
 
 .register input[type=text], .register input[type=password] {
-	width: 428px;
+	width: 100%;
 	margin: 5px 0px 5px 0px;
-	padding: 5px;
+	padding: 8px 5px 8px 5px;
+	font-size: 16px;
 }
 
 .register select {
-	width: 440px;
+	width: 100%;
 	margin: 5px 0px 5px 0px;
-	padding: 5px;
+	padding: 8px 5px 8px 5px;
+	font-size: 16px;
 }
 
 ul#navigation {
@@ -273,8 +276,11 @@ ul#navigation ul li a {
 	text-align: center;
 }
 
-.phpout {
-	text-align: center;
+.phperror {
+	color: red;
+	padding: 4px 0px 4px 0px;
+	margin: 0;
+	font-weight: bold;
 }
 
 .adduser {
@@ -392,10 +398,9 @@ ul#navigation ul li a {
 }
 
 #content {
-    width: 302px;
-	border-radius:10px;
+    width: 25%;
 	border:0px solid #ccc;
-	padding:25px 40px 25px 40px;
+	padding:25px;
 	margin-left: auto; 
 	margin-right: auto;
 }

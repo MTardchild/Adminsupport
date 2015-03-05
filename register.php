@@ -6,43 +6,83 @@ if(isset($_SESSION['user_id'])){
 
 <?php
 	session_start(); // Starting Session
-	$_SESSION['error'] = ""; // Variable To Store Error Message
 		
 	if (isset($_POST['submit'])) {
 		include('MySQLCredentials.php');
 
-		$userid = $_POST["userid"];
-		$username = $_POST["username"];
-		$password = $_POST["password"];
-		$password2 = $_POST["password2"];
-
-		if($password != $password2 OR $username == "" OR $password == "") {
-			echo "<p class=\"phpout\">Input Error. Not all required fields given. <a href=\"register.php\">Zurück</a></p>";
-			$connection->close();
-			exit;
+		if (isset($_POST['userid'])) {
+			$userid = $_POST['userid'];
 		}
+		if (isset($_POST['username'])) {
+			$username = $_POST['username'];
+		}
+		if (isset($_POST['password'])) {
+			$password = $_POST['password'];
+		}
+		if (isset($_POST['password2'])) {
+			$password2 = $_POST['password2'];
+		}
+		
+		if(empty($username) OR empty($password) OR empty($userid)) {
+			if(!isset($_SESSION['error'])) {
+				$_SESSION['error'] = 'Input Error. Not all required fields given.';
+			} else {
+				$_SESSION['error'] .= '<br>' . PHP_EOL . 'Input Error. Not all required fields given.';
+			}
+			$connection->close();
+			exit(header('Location: register.php'));
+		}
+		
+		if ($password != $password2) {
+			if(!isset($_SESSION['error'])) {
+				$_SESSION['error'] = 'Passwords do not match.';
+			} else {
+				$_SESSION['error'] .= '<br>' . PHP_EOL . 'Passwords do not match.';
+			}
+		}
+		
 		// sha512 for encryption
 		$password = hash("sha512", $password);
 
 		$query = $connection->query("SELECT * FROM $login WHERE username LIKE '$username'");
 		$return = $query->num_rows;
-
-		if($return == 0)
-		{
+		
+		if ($return > 0) {
+			if(!isset($_SESSION['error'])) {
+				$_SESSION['error'] = 'Username already in use.';
+			} else {
+				$_SESSION['error'] .= '<br>' . PHP_EOL . 'Username already in use.';
+			}
+		}
+		
+		$query = $connection->query("SELECT * FROM $login WHERE user_id LIKE '$userid'");
+		$return = $query->num_rows;
+		
+		if ($return > 0) {
+			if(!isset($_SESSION['error'])) {
+				$_SESSION['error'] = 'User ID already in use.';
+			} else {
+				$_SESSION['error'] .= '<br>' . PHP_EOL . 'User ID already in use.';
+			}
+		}
+		
+		$connection->close();
+		
+		if(!isset($_SESSION['error'])) {
 			$entry = "INSERT INTO $login (user_id, username, password) VALUES ('$userid', '$username', '$password')";
 			$entry_success = $connection->query($entry);
-			
+				
 			if($entry_success == true) {
 				echo "<p class=\"phpout\">User <b>$username</b> has been created. <a href=\"index.php\">Login</a></p>";
-			}
-			else {
+			} else {
 				echo '<p class=\"phpout\">Error while trying to save. <a href=\"register.php\">Zurück</a></p>';
 				echo $connection->errno . ": " . $connection->error . "\n";
+				$connection->close();
 			}
 		} else {
-			echo '<p class=\"phpout\">Username already in use. <a href=\"register.php\">Zurück</a></p>';
+			$connection->close();
+			exit(header('Location: register.php'));
 		}
-		$connection->close();
 	}
 ?> 
 
@@ -54,6 +94,12 @@ if(isset($_SESSION['user_id'])){
 			<div id="middle">
 				<div id="content">
 					<h2>Register</h2>
+					<?php 
+						if (isset($_SESSION['error'])) {
+							echo '<p class=\'phperror\'>' . $_SESSION['error'] . '</p>';
+							unset($_SESSION['error']);
+						}
+					?>
 					<form action="" method="post" class="register">
 						<select name="userid">
 							<option value="" disabled selected>Personal Number</option>
@@ -69,11 +115,11 @@ if(isset($_SESSION['user_id'])){
 								$connection->close();
 							?>
 						</select>
-						<input type="text" size="24" maxlength="50" name="username" placeholder="Username"><br><br>
+						<input type="text" size="24" maxlength="50" name="username" placeholder="Username" value=""><br><br>
 
-						<input type="password" size="24" maxlength="50" name="password" placeholder="Password"><br>
+						<input type="password" size="24" maxlength="50" name="password" placeholder="Password" value=""><br>
 
-						<input type="password" size="24" maxlength="50" name="password2" placeholder="Retype Password"><br>
+						<input type="password" size="24" maxlength="50" name="password2" placeholder="Retype Password" value=""><br>
 						<input name="submit" type="submit" value="Sign up">
 					</form>
 				</div>
