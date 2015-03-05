@@ -329,23 +329,17 @@ ul#navigation ul li a {
 }
 
 .smallcard {
-	width: 490px; 
+	width: 44%; 
 	float: left;
 	text-align: left;
-	margin: 5px 15px 5px 15px;
-	padding: 5px;
-	border-radius:6px;
+	margin: 1% 1% 1% 1%;
 }
 
 .card {
-	width: 980px;
+	width: 96%;
 	float: left;
 	text-align: center;
-	margin: 5px;
-	padding: 5px;
-	border-radius:6px;
-	margin-left: 15px;
-	margin-right: 15px;
+	margin: 1%;
 }
 
 .contenttable {
@@ -393,33 +387,32 @@ ul#navigation ul li a {
 }
 
 #register {
-	margin-top: 5px;
 	text-align: right;
 }
 
 #welcomemessage {
-	width: 1060px;
-	border-radius:10px;
+	width: 65%;
 	border:0px solid #ccc;
-	padding:25px 40px 25px 40px;
 	margin-left: auto; 
 	margin-right: auto;
+	padding: 10px 2%;
 	overflow: auto;
 }
 
 #content {
     width: 25%;
 	border:0px solid #ccc;
-	padding:25px;
+	padding:2%;
 	margin-left: auto; 
 	margin-right: auto;
 }
 
 #dashboard {
-	width: 1060px;
+	width: 65%;
 	margin-left: auto;
 	margin-right: auto;
 	overflow: auto;
+	padding: 10px 2%;
 }
 
 #middle {
@@ -437,12 +430,6 @@ ul#navigation ul li a {
 	padding-top: 10px;
 }
 
-#profile {
-	padding:50px;
-	border:1px dashed grey;
-	font-size:20px;
-	background-color:#DCE6F7;
-}
 #logout {
 	float:right;
 	padding:0px;
