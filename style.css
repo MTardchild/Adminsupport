@@ -36,8 +36,9 @@ form {
 }
 
 form select {
-	width: 450px;
-	padding: 12px 5px 12px 5px;
+	width: 100%;
+	padding: 8px 5px 8px 5px;
+	margin: 6px 0px;
 	border: 1px solid #ccc;
 }
 
@@ -60,7 +61,7 @@ hr {
 }
 
 input[type=text], input[type=password] {
-	width:280px;
+	width:100%;
 	padding: 10px;
 	margin: 3px auto 10px auto;
 	border:1px solid #ccc;
@@ -86,6 +87,8 @@ input[type=submit] {
 	border-radius:5px;
 }
 
+input {box-sizing:border-box;} 
+
 table {
 	color: #333;
 	font-family: sans-serif;
@@ -108,10 +111,6 @@ thead tr:first-child {
   color: #fff;
   border: none;
 }
-
-input {
-	box-sizing:border-box;
-} 
 
 th {font-weight: bold;}
 th:first-child, td:first-child {padding: 0 15px 0 20px;}
@@ -268,6 +267,19 @@ ul#navigation ul li a {
 /	Classes
 /*****************************/
 
+.column {
+	width: 49%;
+	float: left;
+	margin-right: 2%;
+}
+
+/* Select all but the first element of class .column */
+.column ~ .column {
+	width: 49%;
+	float: left;
+	margin-right: 0px;
+}
+
 .dashhalf {
 	float: left;
 }
@@ -298,7 +310,7 @@ ul#navigation ul li a {
 }
 
 .adduser input[type=submit] {
-	width: 450px;
+	width: 100%;
 	background-color:#428bca;
 	color:#fff;
 	padding:10px;
@@ -308,14 +320,12 @@ ul#navigation ul li a {
 	border-radius:5px;
 }
 
-.contenttable .column {
-	width: 210px;
-	float: left;
-	margin-right: 18px;
+.contenttable .row {
+	width: 100%;
 }
 
-.contenttable .row {
-	width: 438px;
+.contenttable td:last-child {
+	padding: 15px;
 }
 
 .smallcard {
