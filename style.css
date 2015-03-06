@@ -280,6 +280,19 @@ ul#navigation ul li a {
 	margin-right: 0px;
 }
 
+.column2 {
+	width: 49%;
+	float: left;
+	margin-right: 2%;
+}
+
+/* Hack */
+.column2 ~ .column2 {
+	width: 49%;
+	float: left;
+	margin-right: 0px;
+}
+
 .dashhalf {
 	float: left;
 }
@@ -293,6 +306,8 @@ ul#navigation ul li a {
 	padding: 4px 0px 4px 0px;
 	margin: 0;
 	font-weight: bold;
+	text-align: left;
+	line-height: 24px;
 }
 
 .phpsuccess {
@@ -300,6 +315,8 @@ ul#navigation ul li a {
 	padding: 4px 0px 4px 0px;
 	margin: 0;
 	font-weight: bold;
+	text-align: left;
+	line-height: 24px;
 }
 
 .adduser {

@@ -33,21 +33,33 @@
 								<tbody>
 									<tr>
 										<td>
+											<?php 
+												include('output.php');					
+											?>
 											<form action="login-add.php" class="adduser" method="post">
-												<select name="userid">
-													<option value="" disabled selected>Staff Number</option>
-													<?php
-														$query = $connection->query("SELECT user_id, firstname FROM $users");
-														
-														while ($row = $query->fetch_assoc()) 
-														{
-															echo '<option>' . $row['user_id'] . '</option>';
-														}
-														$connection->close();
-													?> 
-												</select>
-												<div class="column"><input type="text" name="username" placeholder="User Name"></div>
-												<div class="column"><input type="text" name="password" placeholder="Password"></div>
+												<div class="column2">
+													<select name="userid">
+														<option value="" disabled selected>Staff Number</option>
+														<?php
+															$query = $connection->query("SELECT user_id, firstname FROM $users");
+															
+															while ($row = $query->fetch_assoc()) 
+															{
+																echo '<option>' . $row['user_id'] . '</option>';
+															}
+															$connection->close();
+														?> 
+													</select>
+												</div>
+												<div class="column2">
+													<select name="rights">
+														<option value="" disabled selected>Rights</option>
+														<option value="0">Trainee</option>
+														<option value="1">Admin</option>
+													</select>
+												</div>		
+												<div class="column"><input type="text" name="username" placeholder="User Name" value=""></div>
+												<div class="column"><input type="text" name="password" placeholder="Password" value=""></div>
 												<input type="submit" value="Add">
 											</form>
 										</td>

@@ -18,7 +18,7 @@
 	}
 	
 	// Check Date
-	if (isset($_POST['date'])) {
+	if (!empty($_POST['date'])) {
 		// date_parse returns associative array
 		// Using date_parse so the input string can be in different formats
 		$dateArray = date_parse($_POST['date']);
@@ -43,7 +43,7 @@
 	}
 
 	// Check Time
-	if (isset($_POST['time'])) {
+	if (!empty($_POST['time'])) {
 		$timeArray = date_parse($_POST['time']);
 		
 		$time = $dateArray['hour'] . ':' . $dateArray['minute'] . ':' . $dateArray['second'];
