@@ -295,6 +295,13 @@ ul#navigation ul li a {
 	font-weight: bold;
 }
 
+.phpsuccess {
+	color: #00cd00;
+	padding: 4px 0px 4px 0px;
+	margin: 0;
+	font-weight: bold;
+}
+
 .adduser {
     display: inline-block;
     text-align: left;

@@ -28,12 +28,15 @@
 			
 			$_SESSION['user_id'] = $row['user_id']; // Initializing Session
 			$_SESSION['user_name'] = $row['username']; // Initializing Session			
-			$_SESSION['rights'] = $row['rights'];
+			$_SESSION['rights'] = $row['rights']; // Variable to store the users rights
+			// Variable to store creation time and last activity time of the
+			// session so it times out and regenerates
 			$_SESSION['created'] = time();
 			$_SESSION['last_activity'] = time();
-			$_SESSION['error'] = ''; // Variable To Store Error Message
+			$_SESSION['error'] = ''; // Variable to store error message
+			$_SESSION['success'] = ''; // Variable to store success message
 			
-			header("location: index.php"); // Redirecting To Other Page
+			header("Location: index.php"); // Redirecting To Other Page
 		} else {
 		$error = "Username or Password is invalid";
 		}
