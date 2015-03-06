@@ -1,22 +1,19 @@
- <?php
-	if (!isset($_SESSION['rights']) || $_SESSION['rights'] == 0) {
-		die('You have no permission to access this page.');
-	}
-	
-	include 'MySQLCredentials.php';
+<?php
+	include('rights.php');
 	
 	if($_GET['id'] == "") {
-		echo 'No ID';
-		exit;
+		$_SESSION['error'] = 'No ID given.';
+		exit(header('Location: log-manage.php'));
 	}
 	$id = $_GET['id'];
 	
+	include 'MySQLCredentials.php';
+	
 	if($connection->query("DELETE FROM $log WHERE log_id='$id'")) {
-		echo 'Record deleted.';
+		$_SESSION['success'] = 'Record deleted.';
 	} else {
-		echo $connection->errno . ": " . $connection->error . "\n";
-		$connection->close();
-		exit;
+		$_SESSION['error'] = $connection->errno . ": " . $connection->error . "\n";
 	}
 	$connection->close(); // Closing Connection
+	exit(header('Location: log-manage.php'));
 ?>
