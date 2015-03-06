@@ -31,6 +31,9 @@
 								<tbody>
 									<tr>
 										<td>
+											<?php
+												include('output.php');
+											?>
 											<form action="tasks-add.php" class="adduser" method="post">
 												<div class="row">
 													<input type="text" name="task_id" placeholder="Task ID">

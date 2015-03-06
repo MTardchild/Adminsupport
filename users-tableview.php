@@ -1,14 +1,13 @@
 <?php
 	include 'MySQLCredentials.php';
 
-	$query = $connection->query("SELECT * FROM $users a INNER JOIN $login b ON a.user_id = b.user_id WHERE b.rights='0'");
+	$query = $connection->query("SELECT * FROM $users");
 	
 	echo '<table>
 	  <thead>
-		<tr><th colspan=\'8\'>Trainees</th></tr>
+		<tr><th colspan=\'8\'>Users</th></tr>
 		<tr>
 		  <th>#</th>
-		  <th>Name</th>
 		  <th>Lastname</th>
 		  <th>Level</th>
 		  <th>Driver</th>
@@ -21,7 +20,6 @@
 	echo '
 		<tr>
 			<td>' . $row['user_id'] . '</td>
-			<td>' . $row['firstname'] . '</td>
 			<td>' . $row['lastname'] . '</td>									
 			<td>' . $row['level'] . '</td>
 			<td>';
@@ -36,37 +34,6 @@
 		  echo '</td>
 		</tr>';
 	  }
-	echo '</tbody></table>';
-	
-	$query = $connection->query("SELECT * FROM $users a INNER JOIN $login b ON a.user_id = b.user_id WHERE b.rights='1'");
-	
-	echo '<table>
-	  <thead>
-		<tr><th colspan=\'8\'>Admins</th></tr>
-		<tr>
-		  <th>#</th>
-		  <th>Name</th>
-		  <th colspan=\'2\'>Lastname</th>
-		</tr>
-	  </thead>
-	  <tbody>';
-	  while ($row = $query->fetch_array(MYSQLI_ASSOC)) {
-	echo '
-		<tr>
-			<td>' . $row['user_id'] . '</td>
-			<td>' . $row['firstname'] . '</td>
-			<td>' . $row['lastname'] . '</td>
-			<td>';
-			// Protect user from deleting his own account
-			if($_SESSION['rights'] == 1 && $_SESSION['user_id'] != $row['user_id']) { 
-				echo '<a href=\'users-delete.php?id=' . $row['user_id'] . '\' class=\'button\'>Delete</a>'; 
-			} else {
-				echo '<b>Forbidden</b>';
-			}
-		  echo '</td>			
-		</tr>';
-	  }
-	echo '</tbody></table>';
-	
+	echo '</tbody></table>';	
 	$connection->close(); 
 ?>

@@ -12,19 +12,21 @@
 	$query = $connection->query("SELECT * FROM $users where user_id='$userid'");
 	$rows = $query->num_rows;
 		if ($rows == 1) {
-			echo "User ID already in use.";
-			exit;
+			$_SESSION['error'] = "User ID already in use.";
+			exit(header('Location: users-manage.php'));
 		} else {
 			$query = "INSERT INTO $users (user_id, firstname, lastname, level, driver, available, score) VALUES ('$userid', '$firstname', '$lastname', '$level', '$driver', '0', '0')";
 			if ($userid == "" || $firstname == "" || $lastname == "" || $level == "" || $driver == "") {
-				echo "Error: One or more fields empty";
-				exit;
+				$_SESSION['error'] = "Error: One or more fields empty";
+				exit(header('Location: users-manage.php'));
 			}
 			if ($connection->query($query)) {
-				echo "New record created successfully";
+				$_SESSION['success'] = "User successfully created.";
+				exit(header('Location: users-manage.php'));
 			} else {
-				echo $connection->errorno . ": " . $connection->error . "\n";
-				exit;
+				$_SESSION['error'] = $connection->errorno . ": " . $connection->error . "\n";
+				$connection->close();
+				exit(header('Location: users-manage.php'));
 			}
 		}
 	$connection->close(); // Closing Connection

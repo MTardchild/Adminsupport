@@ -11,19 +11,20 @@
 	$query = $connection->query("select * from $tasks where task_id='$taskid'");
 	$rows = $query->num_rows;
 		if ($rows == 1) {
-			echo 'Task ID already in use.';
-			exit;
+			$_SESSION['error'] = 'Task ID already in use.';
+			exit(header('Location: tasks-manage.php'));
 		} else {
 			$query = "INSERT INTO $tasks (task_id, name, score, special) VALUES ('$taskid', '$taskname', '$score', '$special')";
 			if ($taskid == "" || $taskname == "" || $score == "" || $special == "") {
-				echo 'Error: One or more fields empty';
-				exit;
+				$_SESSION['error'] = 'Error: One or more fields empty';
+				exit(header('Location: tasks-manage.php'));
 			}
 			if ($connection->query($query)) {
-				echo 'New record created successfully';
+				$_SESSION['success'] = 'New record created successfully';
 			} else {
-				echo 'Error';
+				$_SESSION['error'] = 'Error';
 			}
 		}
 	$connection->close(); // Closing Connection
+	exit(header('Location: tasks-manage.php'));
 ?>

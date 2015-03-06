@@ -33,6 +33,9 @@
 								<tbody>
 									<tr>
 										<td>
+											<?php
+												include('output.php')
+											?>
 											<form action="users-add.php" class="adduser" method="post">
 													<div class="row">
 														<input type="text" name="user_id" placeholder="Staff Number">
