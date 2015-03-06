@@ -9,7 +9,8 @@
 		<tr><th colspan=\'6\'>Login</th></tr>
 		<tr>
 		  <th>#</th>
-		  <th colspan=\'2\'>Name</th>
+		  <th>Name</th>
+		  <th colspan=\'2\'>Rights</th>
 		</tr>
 	  </thead>
 	  <tbody>';
@@ -18,6 +19,9 @@
 		<tr>
 			<td>' . $row['user_id'] . '</td>
 			<td>' . $row['username'] . '</td>
+			<td>'; 
+			if($row['rights'] == 0) { echo 'Trainee'; } else { echo 'Admin'; }
+			echo '</td>
 		  <td>';
 			if($_SESSION['rights'] == 1) { echo '<a href=\'login-delete.php?id=' . $row['user_id'] . '\' class=\'button\'>Delete</a>'; }
 		  echo '</td>

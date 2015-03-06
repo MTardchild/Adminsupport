@@ -113,7 +113,11 @@ thead tr:first-child {
 }
 
 th {font-weight: bold;}
-th:first-child, td:first-child {padding: 0 15px 0 20px;}
+
+th:first-child, td:first-child {
+	padding: 0 15px 0 20px;
+	width: 10%;
+}
 
 thead tr:last-child th {border-bottom: 2px solid #ddd;}
 
