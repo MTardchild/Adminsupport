@@ -46,7 +46,7 @@
 	if (!empty($_POST['time'])) {
 		$timeArray = date_parse($_POST['time']);
 		
-		$time = $dateArray['hour'] . ':' . $dateArray['minute'] . ':' . $dateArray['second'];
+		$time = $timeArray['hour'] . ':' . $timeArray['minute'] . ':' . $timeArray['second'];
 
 		if ($timeArray['error_count'] > 0) {
 			if (!isset($_SESSION['error'])) {
@@ -110,14 +110,15 @@
 					$_SESSION['error'] .= '<br>' . PHP_EOL . 'No trainee eligible for selection.';
 				}
 			} else {
-				$row = $query->fetch_array(MYSQLI_ASSOC);		
-				$trainee = $row['user_id'];
+				$row = $query->fetch_all(MYSQLI_BOTH);		
+				$trainee = $row[0+$_GLOBALS['assigncounter']];
+				$traineeid = $trainee['user_id'];
 			}
 		}
 		
 		// Output/Response for user
 		if (!isset($_SESSION['success'])) {
-			$_SESSION['success'] = 'Trainee selected: ' . $trainee;
+			$_SESSION['success'] = 'Trainee selected: ' . $traineeid;
 		} else {
 			$_SESSION['success'] .= '<br>' . PHP_EOL . 'Trainee selected: ' . $trainee;
 		}
@@ -151,8 +152,9 @@
 		$query = $connection->query("SELECT MAX(log_id) FROM $log");
 		$row = $query->fetch_array(MYSQLI_BOTH);
 		$log_id = $row[0] + 1;
+
 		
-		if($query = $connection->query("INSERT INTO log (log_id, task_id, user_id, date, done) VALUES ('$log_id', '$task', '$trainee', '$date', '0')")) {
+		if($query = $connection->query("INSERT INTO log (log_id, task_id, user_id, date, done) VALUES ('$log_id', '$task', '$traineeid', '$date', '0')")) {
 			if (!isset($_SESSION['success'])) {
 				$_SESSION['success'] = 'Task successfully assigned.';
 			} else {

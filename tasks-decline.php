@@ -1,14 +1,11 @@
 <?php
     header("Location: index.php");
-//    $id = $_GET['id'];
-//
-//    $trainee = $_POST['trainee'];
-//    $task = $_POST['task'];
-//    $date = $_POST['date'] . ' ';
-//    $time = $_POST['time'];
+    $user = $_GET['id'];
 
-//    include 'MySQLCredentials.php';
-//
+	include 'MySQLCredentials.php';
+	
+	
+
 //    if($row = $connection->query("SELECT * FROM $log WHERE log_id='$id'")) {
 //        $row = $query->fetch_array(MYSQLI_ASSOC);
 //

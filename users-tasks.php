@@ -30,7 +30,7 @@
 			if($row['special'] == 1) { echo 'Yes'; } else { echo 'No'; } 
 			echo '</td>
 		  <td>';
-            echo '<a href=\'tasks-decline.php?id=' . $row['log_id'] . '\' class=\'button\'>Decline</a>';
+            echo '<a href=\'tasks-decline.php?user=' . $userid . '\' class=\'button\'>Decline</a>';
 		 echo '</td>
          <td>';
             echo '<a href=\'tasks-done.php?id=' . $row['log_id'] . '\' class=\'button\'>Done</a>';
