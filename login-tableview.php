@@ -56,10 +56,12 @@
 			<td>' . $row['lastname'] . '</td>
 			<td>';
 			// Protect user from deleting his own account
-			if($_SESSION['rights'] == 1 && $_SESSION['user_id'] != $row['user_id']) { 
-				echo '<a href=\'login-delete.php?id=' . $row['user_id'] . '\' class=\'button\'>Delete</a>'; 
-			} else {
-				echo '<b>Forbidden</b>';
+			if ($_SESSION['rights'] == 1) {
+				if($_SESSION['user_id'] != $row['user_id']) { 
+					echo '<a href=\'login-delete.php?id=' . $row['user_id'] . '\' class=\'button\'>Delete</a>'; 
+				} else {
+					echo '<b>Forbidden</b>';
+				}
 			}
 		  echo '</td>			
 		</tr>';

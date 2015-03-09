@@ -63,15 +63,15 @@
 							<?php if($_SESSION['rights'] == 0) {
 							echo'<p>
 								<b>Your Score:</b> ';
-									include 'MySQLConnect.php';
+									include('MySQLConnect.php');
 									
 									$id = $_SESSION['user_id'];
 									if($query = $connection->query("SELECT score from $users WHERE user_id='$id'")) {
 										echo $query->fetch_array(MYSQLI_ASSOC)['score'];
 									} else {
-										echo $connection->errorno . ": " . $connection->error . "\n";
+										$_SESSION['error'] = $connection->errorno . ": " . $connection->error . "\n";
 										$connection->close();
-										exit;
+										exit(header('Location: index.php'));
 									}
 									$connection->close(); // Closing Connection
 							}
