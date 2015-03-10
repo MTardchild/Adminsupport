@@ -290,7 +290,7 @@ ul#navigation ul li a {
 	margin-right: 2%;
 }
 
-/* Hack */
+/* Select all but the first element of class .column */
 .column2 ~ .column2 {
 	width: 49%;
 	float: left;

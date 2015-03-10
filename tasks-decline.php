@@ -4,8 +4,6 @@
 
 	include 'MySQLCredentials.php';
 	
-	
-
 //    if($row = $connection->query("SELECT * FROM $log WHERE log_id='$id'")) {
 //        $row = $query->fetch_array(MYSQLI_ASSOC);
 //

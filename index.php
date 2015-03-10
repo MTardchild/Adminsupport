@@ -60,9 +60,10 @@
 								<b>Your Rights:</b>
 								<?php if($_SESSION['rights'] == 1) { echo ' Admin'; } else { echo ' User'; } ?>
 							</p>
-							<?php if($_SESSION['rights'] == 0) {
-							echo'<p>
-								<b>Your Score:</b> ';
+							<?php 
+								if($_SESSION['rights'] == 0) {
+								echo'<p>
+									<b>Your Score:</b> ';
 									include('MySQLConnect.php');
 									
 									$id = $_SESSION['user_id'];
@@ -74,8 +75,8 @@
 										exit(header('Location: index.php'));
 									}
 									$connection->close(); // Closing Connection
-							}
-								?>
+								}
+							?>
 							</p>			
 						</div>
 					</div>
