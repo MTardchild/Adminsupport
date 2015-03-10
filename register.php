@@ -66,23 +66,19 @@ if(isset($_SESSION['user_id'])){
 		// sha512 for encryption
 		$password = hash("sha512", $password);
 		
-		$connection->close();
-		
 		if(!isset($_SESSION['error'])) {
-			$entry = "INSERT INTO $login (user_id, username, password) VALUES ('$userid', '$username', '$password')";
+			$entry = "INSERT INTO $login (user_id, username, password, rights) VALUES ('$userid', '$username', '$password', '0')";
 			$entry_success = $connection->query($entry);
 				
 			if($entry_success == true) {
-				echo "<p class=\"phpout\">User <b>$username</b> has been created. <a href=\"index.php\">Login</a></p>";
+				$_SESSION['success'] = "User <b>$username</b> has been created. <a href=\"index.php\">Login</a>";
 			} else {
-				echo '<p class=\"phpout\">Error while trying to save. <a href=\"register.php\">Zurück</a></p>';
-				echo $connection->errno . ": " . $connection->error . "\n";
-				$connection->close();
+				$_SESSION['error'] = 'Error while trying to save.';
+				$_SESSION['error'] .= '<br>' . $connection->errno . ": " . $connection->error;
 			}
-		} else {
-			$connection->close();
-			exit(header('Location: register.php'));
-		}
+		} 
+		$connection->close();
+		exit(header('Location: register.php'));
 	}
 ?> 
 
@@ -95,10 +91,7 @@ if(isset($_SESSION['user_id'])){
 				<div id="content">
 					<h2>Register</h2>
 					<?php 
-						if (isset($_SESSION['error'])) {
-							echo '<p class=\'phperror\'>' . $_SESSION['error'] . '</p>';
-							unset($_SESSION['error']);
-						}
+						include('output.php');
 					?>
 					<form action="" method="post" class="register">
 						<select name="userid">
