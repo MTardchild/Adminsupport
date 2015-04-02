@@ -4,8 +4,8 @@
 	if (isset($_POST['submit'])) {
 
 		// Define $username and $password
-		$username=$_POST['username'];
-		$password=$_POST['password'];
+		$username = $_POST['username'];
+		$password = $_POST['password'];
 		
 		// Connect to SQL
 		include 'MySQLCredentials.php';
@@ -22,17 +22,23 @@
 		// SQL query to fetch information of registered users and finds user match.
 		$query = $connection->query("select * from login where password='$password' AND username='$username'");
 		$rows = $query->num_rows;
-		if ($rows == 1) {				
+		if ($rows == 1) {
 			$query = $connection->query("SELECT * FROM login WHERE username='$username'");
 			$row = $query->fetch_array(MYSQLI_ASSOC);
 			
 			$_SESSION['user_id'] = $row['user_id']; // Initializing Session
 			$_SESSION['user_name'] = $row['username']; // Initializing Session			
 			$_SESSION['rights'] = $row['rights']; // Variable to store the users rights
+			
+			// Verification Cookie for security purposes
+			$_SESSION['verification'] = hash("sha512", $_SESSION['user_id'] . $_SESSION['user_name'] 
+													 . $_SESSION['rights'] . $_SESSION['last_activity']);
+			
 			// Variable to store creation time and last activity time of the
-			// session so it times out and regenerates
+			// session, used for timeout and session regeneration
 			$_SESSION['created'] = time();
 			$_SESSION['last_activity'] = time();
+			
 			$_SESSION['error'] = ''; // Variable to store error message
 			$_SESSION['success'] = ''; // Variable to store success message
 			
